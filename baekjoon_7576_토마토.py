@@ -7,9 +7,11 @@ for i in range(N):
     horizon = []
     horizon = list(map(int,input().split()))
     bracket.append(horizon)
-    if 1 in horizon:
-        stack.append([i,horizon.index(1)])
-    zero_stack += horizon.count(0)
+    for j in range(M):
+        if horizon[j] == 1:
+            stack.append([i,j])
+        elif horizon[j] == 0:
+            zero_stack += 1
 
 direction = [[0,1],[1,0],[0,-1],[-1,0]]
 day = 1
