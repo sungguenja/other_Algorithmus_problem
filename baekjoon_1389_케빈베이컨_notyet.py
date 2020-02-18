@@ -1,16 +1,22 @@
-su_len=999
-def kevin(start,end,fre_len=0):
-    global su_len
-    
-    if start == end and su_len>fre_len:
-        su_len = fre_len
-        
+def bfs(start,end,visit):
+    que = [[start,visit]]
 
-    for z in range(1,N+1):
-        if visit[z] == 0 and friend[start][z] == 1:
-            visit[z] = 1
-            kevin(z,end,fre_len+1) == 1
-            visit[z] = 0
+    while que != []:
+        z=que.pop()
+        X,used = z[0],z[1]
+        cnt=len(visit)
+        while X < len(visit):
+            if start == end and z>sum(used):
+                cnt=sum(used)
+                break
+            if used[X] == 0 and friend[start][X] == 1:
+                used[X] = 1
+                que.append([X,used])
+                used[X] = 0
+                X+=1
+            else:
+                X+=1
+    return cnt
 
 N,M = map(int,input().split())
 
@@ -21,20 +27,12 @@ for _ in range(M):
     friend[fre1][fre2] = 1
     friend[fre2][fre1] = 1
 
-min_len = N*M
-V=N+5
+
 for i in range(1,N+1):
     su = 0
     for j in range(1,N+1):
         if i==j:
             continue
-        visit=[0]*(N+1)
-        su_len = N*M
-        kevin(i,j)
-        su += su_len
-    if min_len > su:
-        min_len = su
-        V=i
-    elif min_len == su and V>i:
-        V=i
-print(V)
+        visit=[0]*N
+        print(bfs(i,j,visit))
+        
