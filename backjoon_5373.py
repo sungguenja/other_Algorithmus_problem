@@ -29,7 +29,7 @@ for i in range(N):
     elif cycle[i] == 'F+':
         cube[3][3],cube[4][3],cube[5][3],cube[5][4],cube[5][5],cube[4][5],cube[3][5],cube[3][4] = cube[4][3],cube[5][3],cube[5][4],cube[5][5],cube[4][5],cube[3][5],cube[3][4],cube[3][3]
         cube[3][2],cube[2][3],cube[2][4],cube[2][5],cube[3][6],cube[3][7],cube[3][8],cube[6][5],cube[6][4],cube[6][3],cube[5][2],cube[4][2] = cube[4][2],cube[3][2],cube[2][3],cube[2][4],cube[2][5],cube[3][6],cube[3][7],cube[3][8],cube[6][5],cube[6][4],cube[6][3],cube[5][2]
-    elif cycle[i] == 'F-':
-        cube[3][3],
+    # elif cycle[i] == 'F-':
+    #     cube[3][3],
 # for k in cube:
 #     print(k)

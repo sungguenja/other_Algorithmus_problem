@@ -1,36 +1,49 @@
-N=int(input())
-dummy = [[0]*N for _ in range(N)]
-for _ in range(int(input())):
-    apple1, apple2 = map(int,input().split())
-    dummy[apple1-1][apple2-1] = 'A'
-
-M=int(input())
-command = [0]*M
-for i in range(M):
-    command[i] = list(input().split())
-
 direction = [[0,1],[1,0],[0,-1],[-1,0]]
-snake=[[0,0],[0,0]]
-k=0
-ending = 0
-alive = 0
-for i in range(M):
-    for _ in range(int(command[i][0])):
-        snake[0][0] += direction[k][0]
-        snake[0][1] += direction[k][1]
-        alive += 1
-        if snake[0][0] >= N or snake[0][0] < 0 or snake[0][1] >= N or snake[0][1] < 0:
-            ending = 1
+def dummy(N,c_case):
+    r,c,d = 1,1,0
+    snake = [[r,c]]
+    game_map[r][c] = 1
+    t=0
+    cnt=0
+    while True:
+        t+=1
+        r+=direction[d][0]
+        c+=direction[d][1]
+        if 1<=r<=N and 1<=c<=N:
+            if game_map[r][c] == 1:
+                break
+            else:
+                if game_map[r][c] != 'A':
+                    Z=snake.pop(0)
+                    rr,cc=Z[0],Z[1]
+                    game_map[rr][cc]=0
+                snake.append([r,c])
+                game_map[r][c] = 1
+                
+                if cnt<c_case and t==int(command[cnt][0]):
+                    if command[cnt][1] == 'D':
+                        d += 1
+                        if d==4:
+                            d=0
+                        cnt+=1
+                    elif command[cnt][1] == 'L':
+                        d -= 1
+                        if d==-1:
+                            d=3
+                        cnt+=1    
+        else:
             break
-        if dummy[snake[0][0]][snake[0][1]] == 'A':
-            dummy[snake[0][0]][snake[0][1]] = 0
-            snake[1][0] += direction[k][0]
-            snake[1][1] += direction[k][1]
-    else:
-        if command[i][1] == 'D':
-            k = (k+1)%4
-        elif command[i][1] == 'L':
-            k = (k+3)%4
-    if ending == 1:
-        break
-print(alive)
+    
+    return t
+
+N=int(input())
+game_map = [[0]*(N+1) for _ in range(N+1)]
+a = int(input())
+for _ in range(a):
+    apple_y,apple_x = map(int,input().split())
+    game_map[apple_y][apple_x] = 'A'
+c_case = int(input())
+command = []
+for _ in range(c_case):
+    command.append(list(input().split()))
+print(dummy(N,c_case))
