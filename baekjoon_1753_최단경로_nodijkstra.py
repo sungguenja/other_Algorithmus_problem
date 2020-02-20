@@ -1,8 +1,6 @@
-import sys
-
-INF = sys.maxsize
 V,E=map(int,input().split())
 start = int(input())
+ZXC=start-1
 node = [['INF']*V for _ in range(V)]
 
 for _ in range(E):
@@ -21,3 +19,17 @@ while que != []:
             visit[j]=1
             dis_node[start][j] = dis + node[start][j]
             que.append([j,dis_node[start][j],visit])
+dis = [100,100,100,100,100]
+for i in range(V):
+    if i == ZXC:
+        dis[i] = 0
+        continue
+    for j in range(V):
+        if dis_node[j][i] != 0 and dis[i] > dis_node[j][i]:
+            dis[i] = dis_node[j][i]
+
+for i in dis:
+    if i != 100:
+        print(i)
+    else:
+        print('INF')
