@@ -44,12 +44,11 @@ def moving(p, go):         # 재귀 한도 뜰 각이어서 움직이는거 따�
                 njr-=1
             else:
                 njb-=1
-            p=[nir,njr,nib,njb]
         elif go==1:
             if p[0]<p[2]:
-                njb-=1
+                nir-=1
             else:
-                njr-=1
+                nib-=1
         elif go==2:
             if p[1]<p[3]:
                 njb+=1
