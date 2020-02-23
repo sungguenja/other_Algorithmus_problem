@@ -1,8 +1,10 @@
-#피보나치네....
-memo = [0,1,2]
-def floor(N):
-    global memo
-    if N>=3 and len(memo)<N+1:
-        memo.append(floor(N-1)+floor(N-2))
-    return memo[N]
-print(floor(int(input())))
+def tile(N):
+    dp = [0,1,2]
+    if N<len(dp):
+        return dp[N]
+    else:
+        for i in range(3,N+1):
+            dp.append(dp[i-1]+dp[i-2])
+        return dp[N]
+
+print(tile(int(input())))
