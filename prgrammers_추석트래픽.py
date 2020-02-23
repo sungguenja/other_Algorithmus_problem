@@ -10,18 +10,19 @@ def solution(lines):
     for k in range(len(traffic)):
         now_count = 0
         for j in range(len(traffic)):
-            if traffic[j][0]<=traffic[k][0]<=traffic[j][1] or traffic[j][0]<=traffic[k][0]+999<=traffic[j][1]:
+            if traffic[j][0]<=traffic[k][0]<=traffic[j][1] or traffic[j][0]<=traffic[k][0]+999<=traffic[j][1] or traffic[k][0]<=traffic[j][0]<=traffic[k][0]+999:
                 now_count += 1
         if now_count>counting:
             counting = now_count
         now_count = 0
         for j in range(len(traffic)):
-            if traffic[j][0]<=traffic[k][1]<=traffic[j][1] or traffic[j][0]<=traffic[k][1]+999<=traffic[j][1]:
+            if traffic[j][0]<=traffic[k][1]<=traffic[j][1] or traffic[j][0]<=traffic[k][1]+999<=traffic[j][1] or traffic[k][1]<=traffic[j][0]<=traffic[k][1]+999:
                 now_count += 1
         if now_count>counting:
             counting = now_count
 
     return counting
+
 
 X=['2016-09-15 01:00:04.001 2.0s','2016-09-15 01:00:07.000 2s']
 print(solution(X))
