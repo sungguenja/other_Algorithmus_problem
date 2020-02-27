@@ -10,4 +10,4 @@ for i in range(1,N+1):
         if num_list[i]>num_list[j] and num_rank[j]>=z:
             z=num_rank[j]
     num_rank[j+1] = z+1
-print(num_rank)
+print(max(num_rank[N]))
