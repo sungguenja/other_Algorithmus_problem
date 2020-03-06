@@ -45,5 +45,8 @@ for i in range(len(room)-2):
                     if copy_lab[y][x] == 0 and lab[y][x] == 0:
                         cnt += 1
             if cnt > safe_room:
+                for k in copy_lab:
+                    print(k)
                 safe_room = cnt
+                print()
 print(safe_room)
