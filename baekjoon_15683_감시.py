@@ -1,4 +1,4 @@
-import copy
+from copy import deepcopy
 N,M=map(int,input().split())
 
 room=[0]*N
@@ -13,27 +13,9 @@ def case(N,M):
         if visit[i] >= len(direction[now_cc[i][2]]):
             return
     
-    c_room = copy.deepcopy(room)
-
-    for v in range(len(visit)):
-        for k in range(len(direction[now_cc[v][2]][visit[v]])):
-            while 0<=ni<N and 0<=nj<M:
-                ni = ni+see[direction[now_cc[v][2]][visit[v]][k]][0]
-                nj = nj+see[direction[now_cc[v][2]][visit[v]][k]][1]
-                if 0<=ni<N and 0<=nj<M:
-                    if c_room[ni][nj] == 0:
-                        c_room[ni][nj] = '#'
-                    elif c_room[ni][nj] == 6:
-                        break
-    else:
-        cnt = 0
-        for i in range(N):
-            for j in range(M):
-                if c_room[i][j] == 0:
-                    cnt += 1
-        else:
-            if cnt<last_cnt:
-                last_cnt = cnt
+    ans = check(room,N,M)
+    if ans<last_cnt:
+        last_cnt=ans
     
     for i in range(len(visit)):
         if visit[i] < len(direction[now_cc[i][2]]):
@@ -41,6 +23,27 @@ def case(N,M):
             case(N,M)
             visit[i] -= 1
 
+def check(chamber,N,M):
+    func_room = deepcopy(chamber)
+
+    for v in range(len(visit)):
+        i=now_cc[v][0]
+        j=now_cc[v][1]
+        for k in direction[now_cc[v][2]][visit[v]]:
+            ni=i
+            nj=j
+            while 0<=ni<N and 0<=nj<M and func_room[ni][nj] != 6:
+                func_room[ni][nj] = '#'
+                ni+=see[k][0]
+                nj+=see[k][1]
+
+    cnt = 0
+    for i in range(N):
+        for j in range(M):
+            if func_room[i][j] == 0:
+                cnt += 1
+
+    return cnt
 
 now_cc = []
 for i in range(N):
