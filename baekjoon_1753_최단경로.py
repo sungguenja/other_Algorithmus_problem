@@ -1,44 +1,38 @@
-import sys
+INF = 300000*20000
 
-def dijkstra(K,V,node):
-    INF = sys.maxsize
+def dijkstra(V,node,start):
+    global INF
 
-    S=[False]*V             # 방문 여부
+    D = [INF]*V
+    P = [None]*V
+    visit = [False]*V
+    D[start] = 0
 
-    d=[INF]*V           # 거리 저장용
-    d[K-1] = 0          # 자기 자신에게 가는 비용은 0이다.
+    for _ in range(V):
+        min_num=INF
+        minindex=-1
+        for i in range(V):
+            if not visit[i] and D[i]<min_num:
+                min_num=D[i]
+                minindex=i
+        visit[minindex] = True
+        for i in range(V):
+            if not visit[i] and D[minindex]+node[minindex][i]<D[i]:
+                D[i] = D[minindex]+node[minindex][i]
+                P[i] = minindex
 
-    while True:
-        m=INF
-        N=-1
+    return D
 
-        for v in range(V):
-            if not S[v] and m>d[v]:
-                m=d[v]
-                N=v
-
-        if m==INF:
-            break
-
-        S[N] = True
-
-        for v in range(V):
-            if S[v]:
-                continue
-            else:
-                distence = d[N] + node[N][v]
-                if d[v] > distence:
-                    d[v] = distence
-    
-    return d
-
-INF = sys.maxsize
-V,E=map(int,input().split())
+K,V=map(int,input().split())
 start = int(input())
-node = [[INF]*V for _ in range(V)]
-for _ in range(E):
-    S,E,P=map(int,input().split())
-    node[S-1][E-1] = P
+root = [[INF]*K for _ in range(K)]
+for _ in range(V):
+    i,j,w=map(int,input().split())
+    root[i-1][j-1] = w
 
-for d in dijkstra(start,V,node):
-    print(d if d!=INF else 'INF')
+now = dijkstra(K,root,start-1)
+for i in range(K):
+    if now[i] == INF:
+        print('INF')
+    else:
+        print(now[i])
