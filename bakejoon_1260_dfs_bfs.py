@@ -1,12 +1,10 @@
-def dfs(start,N,visit=[]):
-    global dfs_line
-    visit+=[start]
+def dfs(start,N):
+    global visit
 
     for i in range(N+1):
         if i not in visit and node[start][i] != 0:
-            if i not in dfs_line:
-                dfs_line.append(i)
-            dfs(i,N,visit+[i])
+            visit += [i]
+            dfs(i,N)
 
 N,M,start=map(int,input().split())
 node=[[0]*(N+1)]
@@ -27,8 +25,7 @@ while que != []:
             que.append(j)
             bfs_line.append(j)
             bfs_visit[j] = 1
-
-dfs_line=[start]
+visit=[start]
 dfs(start,N)
-print(' '.join(map(str,dfs_line)))
+print(' '.join(map(str,visit)))
 print(' '.join(map(str,bfs_line)))
