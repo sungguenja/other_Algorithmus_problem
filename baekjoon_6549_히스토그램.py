@@ -1,20 +1,33 @@
 while True:
-    histogram = list(map(int,input().split()))
-    area=[0]*len(histogram)
-    if histogram == [0]:
+    arr = list(map(int,input().split()))
+    if arr == [0]:
         break
-    for i in range(1,len(histogram)):
-        z=1
-        if histogram[i] != 1:
-            for j in range(i+1,len(histogram)):
-                if histogram[i]>histogram[j]:
-                    break
-                z+=1
-            for j in range(i-1,0,-1):
-                if histogram[i]>histogram[j]:
-                    break
-                z+=1
+    length = arr[0]
+    arr = arr[1:]
+    stack = [0]*len(arr)
+    check = [True]*len(arr)
+    maximum = -1
+    r=0
+    l=0
+    while r < len(arr):
+        X = arr[r]
+        if l == 0:
+            stack[l] = X
+            l+=1
         else:
-            z=len(histogram)-1
-        area[i] = histogram[i]*z
-    print(max(area))
+            save_l=l
+            while stack[l-1] != 0 and stack[l-1]>X:
+                if maximum<stack[l-1]*(save_l-l+1):
+                    maximum = stack[l-1]*(save_l-l+1)
+                stack[l-1] = 0
+                l -= 1
+            stack[l] = X
+            l+=1
+        r+=1
+    if stack != [0]*len(arr):
+        i=0
+        while i<len(stack) and stack[i] != 0:
+            if maximum<stack[i][1]-stack[i][0]:
+                maximum = stack[i][1]-stack[i][0]
+            i+=1
+    print(maximum)
