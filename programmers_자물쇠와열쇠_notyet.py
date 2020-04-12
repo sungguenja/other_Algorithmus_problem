@@ -1,46 +1,45 @@
-def solution(key, lock):
-    locker = []
-    end = -1
-    start = len(lock)*len(lock)+1
-    num = 0
-    for i in range(len(lock)):
-        for j in range((len(lock))):
-            locker.append((lock[i][j]+1)%2)
-            if lock[i][j]==0:
-                if num<start:
-                    start=num
-                if num>end:
-                    end=num
-            num+=1
-    
-    copy_key_000 = []
-    copy_key_090 = []
-    copy_key_180 = []
-    copy_key_270 = []
-    for i in range(len(key)):
-        for j in range(len(key)):
-            copy_key_000.append(key[i][j])
-    for j in range(len(key)):
-        for i in range(len(key)-1,-1,-1):
-            copy_key_090.append(key[i][j])
-    for i in range(len(key)):
-        for j in range(len(key)-1,-1,-1):
-            copy_key_180.append(key[i][j])
-    for j in range(len(key)):
-        for i in range(len(key)):
-            copy_key_270.append(key[i][j])
+from copy import deepcopy
+def rotate(cipher):
+    c_cipher = deepcopy(cipher)
+    for i in range(len(cipher)):
+        for j in range(len(cipher)):
+            c_cipher[j][len(cipher)-1-i] = cipher[i][j]
+    return c_cipher
 
-    answer = False
-    for k in range(len(copy_key_000)-(end-start)):
-        if copy_key_000[k:k+(end-start)+1] == locker[start:end+1]:
-            answer = True
-        if copy_key_090[k:k+(end-start)+1] == locker[start:end+1]:
-            answer = True
-        if copy_key_180[k:k+(end-start)+1] == locker[start:end+1]:
-            answer = True
-        if copy_key_270[k:k+(end-start)+1] == locker[start:end+1]:
-            answer = True
+def check(y,x,cipher,field,door):
+    c_field = deepcopy(field)
+    for i in range(y,y+len(cipher)):
+        for j in range(x,x+len(cipher)):
+            c_field[i][j] += cipher[i-y][j-x]
+    trigger = True
+    for i in range(len(cipher)-1,len(cipher)-1+len(door)):
+        for j in range(len(cipher)-1,len(cipher)-1+len(door)):
+            if c_field[i][j] == 0 or c_field[i][j] == 2:
+                trigger = False
+                break
+        if not trigger:
+            break
+    return trigger
+
+def solution(key, lock):
+    locker = [[0]*(2*(len(key)-1)+len(lock)) for _ in range(2*(len(key)-1)+len(lock))]
     
+    for i in range(len(key)-1,len(key)-1+len(lock)):
+        for j in range(len(key)-1,len(key)-1+len(lock)):
+            locker[i][j] = lock[i-len(key)+1][j-len(key)+1]
+
+    for _ in range(4):
+        key = deepcopy(rotate(key))
+        for i in range(len(key)+len(lock)-1):
+            for j in range(len(key)+len(lock)-1):
+                answer = check(i,j,key,locker,lock)
+                if answer:
+                    break
+            if answer:
+                break
+        if answer:
+            break
+
     return answer
 
-print(solution([[0,0,0],[1,0,0],[0,1,1]],[[1,1,1],[1,1,0],[1,1,0]]))
+print(solution([[0,0,0],[1,0,0],[0,1,1]],[[1,1,1],[1,1,0],[1,0,1]]))

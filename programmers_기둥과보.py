@@ -9,17 +9,16 @@ def check(architect,x,y,case,n):
         c_blue[y][x+1] = c_blue[y][x+1][0] + c_blue[y][x+1][1] + c_blue[y][x+1][2] + '0'
     for i in range(n+1):
         for j in range(n+1):
-            if c_blue[i][j] != '0000':
-                if c_blue[i][j][0] == '1':
-                    if i==0 or (i>0 and c_blue[i][j][1]=='1') or c_blue[i][j][2] == '1' or c_blue[i][j][3] == '1':
-                        continue
-                    else:
-                        return False, c_blue
-                if c_blue[i][j][2] == '1':
-                    if c_blue[i][j][1] == '1' or c_blue[i][j+1][1] == '1' or (c_blue[i][j][3] == '1' and c_blue[i][j+1][2] == '1'):
-                        continue
-                    else:
-                        return False, c_blue
+            if c_blue[i][j][0] == '1':
+                if i==0 or c_blue[i][j][1]=='1' or c_blue[i][j][2] == '1' or c_blue[i][j][3] == '1':
+                    pass
+                else:
+                    return False, c_blue
+            if c_blue[i][j][2] == '1':
+                if c_blue[i][j][1] == '1' or c_blue[i][j+1][1] == '1' or (c_blue[i][j][3] == '1' and c_blue[i][j+1][2] == '1'):
+                    pass
+                else:
+                    return False, c_blue
     return True, c_blue
 
 def solution(n, build_frame):
@@ -47,7 +46,10 @@ def solution(n, build_frame):
                 answer.append([j,i,0])
             if build[i][j][2] == '1':
                 answer.append([j,i,1])
+    for k in build:
+        print(k)
     return answer
 
 print(solution(5,[[1,0,0,1],[1,1,1,1],[2,1,0,1],[2,2,1,1],[5,0,0,1],[5,1,0,1],[4,2,1,1],[3,2,1,1]]))
 print(solution(5,[[0,0,0,1],[2,0,0,1],[4,0,0,1],[0,1,1,1],[1,1,1,1],[2,1,1,1],[3,1,1,1],[2,0,0,0],[1,1,1,0],[2,2,0,1]]))
+print(solution(5,[[0,0,0,1],[0,1,0,1],[0,1,1,1],[1,0,0,1],[0,2,0,1],[0,0,0,0],[1,1,0,1],[1,2,0,1],[0,3,1,1],[0,2,0,0],[1,2,0,0],[1,1,1,1],[2,1,0,1],[2,1,1,1],[3,0,0,1],[2,1,1,1],[3,0,0,0]]))

@@ -27,7 +27,6 @@ def solution(p):
                     break
             u = p[:i+1]
             v = p[i+1:]
-            print(u,v)
             stack = []
             for i in range(len(u)):
                 if u[i] == '(':
