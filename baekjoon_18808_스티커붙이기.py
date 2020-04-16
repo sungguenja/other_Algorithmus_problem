@@ -1,29 +1,44 @@
-from copy import deepcopy
+def rotate(paper):
+    r,c = len(paper),len(paper[0])
+    return [[paper[r-1-j][i] for j in range(r)] for i in range(c)]
 
-N,M,S=map(int,input().split())
-paper = [[0]*M for _ in range(N)]
-sticker = [[0]*4 for _ in range(S)]
-for i in range(S):
-    y,x=map(int,input().split())
-    now_sticker=[0]*y
-    for j in range(y):
-        horizone = []
-        horizone = list(map(int,input().split()))
-        now_sticker[j] = horizone[:]
-    zero_degree = deepcopy(now_sticker)
-    ninty_degre = [[0]*N for _ in range(M)]
-    reverse_deg = [[0]*N for _ in range(M)]
-    pi_degree = [[0]*M for _ in range(N)]
-    for ni in range(N):
-        for nj in range(M):
-            ninty_degre[nj][ni] = zero_degree[ni][nj]
-            reverse_deg[-nj-1][-ni-1] = zero_degree[ni][nj]
-            pi_degree[-ni-1][-nj-1] = zero_degree[ni][nj]
-    sticker[i][0] = deepcopy(zero_degree)
-    sticker[i][1] = deepcopy(ninty_degre)
-    sticker[i][2] = deepcopy(pi_degree)
-    sticker[i][3] = deepcopy(reverse_deg)
+def posible(x,y):
+    for i in range(len(paper)):
+        for j in range(len(paper[i])):
+            try:
+                if note[y+i][x+j] == 1 and paper[i][j] == 1:
+                    return False
+            except IndexError:
+                return False
+    
+    for i in range(len(paper)):
+        for j in range(len(paper[i])):
+            if paper[i][j] == 1:
+                note[y+i][x+j] = 1
+    
+    return True
 
-for t in range(S):
-    for c in range(4):
-        
+n,m,k = map(int,input().split())
+note = [[0]*m for _ in range(n)]
+
+for _ in range(k):
+    r,c=map(int,input().split())
+    paper = [list(map(int,input().split())) for _ in range(r)]
+    trigger = False
+    for k in range(4):
+        for i in range(n-r+1):
+            for j in range(m-c+1):
+                if posible(j,i):
+                    trigger = True
+                    break
+            if trigger:
+                break
+        if trigger:
+            break
+        paper = rotate(paper)
+        r,c=c,r
+
+cover = 0
+for k in note:
+    cover += sum(k)
+print(cover)
