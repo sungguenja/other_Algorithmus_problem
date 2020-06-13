@@ -27,7 +27,7 @@ def solution(N,M,guide):
                                 arr[ord(guide[nni][nnj])-65] += 1
                 maximum = max(arr)
                 if maximum != 0:
-                    answer_dict[chr[arr.index(maximum)+65]] += maximum
+                    answer_dict[chr(arr.index(maximum)+65)] += maximum
     for key, value in answer_dict.items():
         if value == None:
             continue
