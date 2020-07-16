@@ -222,6 +222,8 @@ pls I wish I can :pray:
 
 [baekjoon_2116_주사위쌓기_notyet.py](https://github.com/sungguenja/other_Algorithmus_problem/blob/master/baekjoon_2116_주사위쌓기_notyet.py)
 
+[baekjoon_2174_로봇시뮬레이션.py](https://github.com/sungguenja/other_Algorithmus_problem/blob/master/baekjoon_2174_%EB%A1%9C%EB%B4%87%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98.py)
+
 [baekjoon_2178_미로탐색.py](https://github.com/sungguenja/other_Algorithmus_problem/blob/master/baekjoon_2178_미로탐색.py)
 
 [baekjoon_2206_벽부수고이동하기.py](https://github.com/sungguenja/other_Algorithmus_problem/blob/master/baekjoon_2206_벽부수고이동하기.py)
