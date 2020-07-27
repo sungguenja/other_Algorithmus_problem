@@ -29,3 +29,5 @@ visit = [0]*N
 visit[start] = 1
 solution(N,start)
 print(answer)
+# 플로이드 와샬인 듯 하다.....
+# 플로이드 와샬을 익히고 풀어보자

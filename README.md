@@ -136,6 +136,8 @@ pls I wish I can :pray:
 
 [baekjoon_15591_MooTube.py](https://github.com/sungguenja/other_Algorithmus_problem/blob/master/baekjoon_15591_MooTube.py)
 
+[baekjoon_15591_MooTube(silver)_re.py](https://github.com/sungguenja/other_Algorithmus_problem/blob/master/baekjoon_15591_MooTube_re.py)
+
 [baekjoon_15649_N과M_1.py](https://github.com/sungguenja/other_Algorithmus_problem/blob/master/baekjoon_15649_N과M_1.py)
 
 [baekjoon_15650_N과M_2.py](https://github.com/sungguenja/other_Algorithmus_problem/blob/master/baekjoon_15650_N과M_2.py)
@@ -156,7 +158,11 @@ pls I wish I can :pray:
 
 [baekjoon_15685_드래곤커브.py](https://github.com/sungguenja/other_Algorithmus_problem/blob/master/baekjoon_15685_드래곤커브.py)
 
+[baekjoon_15685_드래곤커브_study.py](https://github.com/sungguenja/other_Algorithmus_problem/blob/master/baekjoon_15685_%EB%93%9C%EB%9E%98%EA%B3%A4%EC%BB%A4%EB%B8%8C_study.py)
+
 [baekjoon_15686_치킨배달.py](https://github.com/sungguenja/other_Algorithmus_problem/blob/master/baekjoon_15686_치킨배달.py)
+
+[baekjoon_15686_치킨배달_study.py](https://github.com/sungguenja/other_Algorithmus_problem/blob/master/baekjoon_15686_%EC%B9%98%ED%82%A8%EB%B0%B0%EB%8B%AC_study.py)
 
 [baekjoon_1592_영식이와친구들.py](https://github.com/sungguenja/other_Algorithmus_problem/blob/master/baekjoon_1592_영식이와친구들.py)
 
@@ -237,6 +243,8 @@ pls I wish I can :pray:
 [baekjoon_2304_창고다각형.py](https://github.com/sungguenja/other_Algorithmus_problem/blob/master/baekjoon_2304_창고다각형.py)
 
 [baekjoon_2309_일곱난쟁이.py](https://github.com/sungguenja/other_Algorithmus_problem/blob/master/baekjoon_2309_일곱난쟁이.py)
+
+[baekjoon_2310_어드벤처게임.py](https://github.com/sungguenja/other_Algorithmus_problem/blob/master/baekjoon_2310_%EC%96%B4%EB%93%9C%EB%B2%A4%EC%B2%98%EA%B2%8C%EC%9E%84.py)
 
 [baekjoon_2477_참외밭.py](https://github.com/sungguenja/other_Algorithmus_problem/blob/master/baekjoon_2477_참외밭.py)
 
