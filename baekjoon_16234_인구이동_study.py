@@ -15,6 +15,7 @@ while before_earth != earth:
     for i in range(N):
         for j in range(N):
             if not visit[i][j]:
+                visit[i][j] = True
                 for k in range(4):
                     ni = i + di[k]
                     nj = j + dj[k]
@@ -24,6 +25,7 @@ while before_earth != earth:
                             x+=1
                             visit[i][j] = True
                             answer = 0
+                            # bfs
                             while y<x:
                                 ni,nj=que[y][0],que[y][1]
                                 answer += earth[ni][nj]
@@ -38,7 +40,7 @@ while before_earth != earth:
                                             visit[nni][nnj] = True
                             answer = answer//x
                             break
-                if que != [0]*(N**2):
+                if x != 0:
                     nx=0
                     while nx<N**2 and que[nx] != 0:
                         earth[que[nx][0]][que[nx][1]] = answer
