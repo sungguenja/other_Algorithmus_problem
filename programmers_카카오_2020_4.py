@@ -1,13 +1,13 @@
 answer = 99999999
 direction = [[0,1],[1,0],[0,-1],[-1,0]]
-def backtrack(vis,road,N,i=0,j=0,cnt=0):
+def backtrack(vis,road,N,i=0,j=0,cost=0,direct=5):
     global answer
-    if answer<=cnt:
+    if answer<=cost:
         return
     
     if i==N-1 and j==N-1:
-        if answer>cnt:
-            answer = cnt
+        if answer>cost:
+            answer = cost
         return
     
     for k in direction:
@@ -16,7 +16,13 @@ def backtrack(vis,road,N,i=0,j=0,cnt=0):
         if 0<=ni<N and 0<=nj<N:
             if road[ni][nj] == 0 and vis[ni][nj] == 0:
                 vis[ni][nj] = 1
-                backtrack(vis,road,N,ni,nj,cnt+1)
+                if direct == 5:
+                    backtrack(vis,road,N,ni,nj,cost+100,direction.index([ni-i,nj-j]))
+                else:
+                    if direction.index([ni-i,nj-j]) == direct or (direction.index([ni-i,nj-j])+2)%4 == direct:
+                        backtrack(vis,road,N,ni,nj,cost+100,direction.index([ni-i,nj-j]))
+                    else:
+                        backtrack(vis,road,N,ni,nj,cost+600,direction.index([ni-i,nj-j]))
                 vis[ni][nj] = 0
 
 def solution(board):
