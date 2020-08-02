@@ -1,57 +1,57 @@
-from copy import deepcopy
 di = [-1,-1,-1,0,0,1,1,1]
 dj = [-1,0,1,-1,1,-1,0,1]
 N,M,K = map(int,input().split())
-food = [list(map(int,input().split())) for _ in range(N)]
-tree = [list(map(int,input().split())) for _ in range(M)]
-c_food = [[5]*N for _ in range(N)]
+nutriton = [[5]*N for _ in range(N)]
+S2D2 = [list(map(int,input().split())) for _ in range(N)]
+ground = [[{} for _ in range(N)] for _ in range(N)]
+
+for _ in range(M):
+    x,y,z = map(int,input().split())
+    ground[x-1][y-1][z] = 1
+
 for _ in range(K):
-    tree = sorted(tree, key=lambda x: x[2])
-    live_tree = [0]*len(tree)
-    dead_tree = [0]*len(tree)
-    j = 0
-    k = 0
-    # 봄
-    for i in range(len(tree)):
-        x,y,z = tree[i]
-        if c_food[x-1][y-1] - z < 0:
-            dead_tree[j] = [x,y,z]
-            j+=1
-        else:
-            c_food[x-1][y-1] -= z
-            live_tree[k] = [x,y,z+1]
-            k+=1
-    # 여름
-    for i in range(len(dead_tree)):
-        if dead_tree[i] == 0:
-            break
-        x,y,z = dead_tree[i]
-        c_food[x-1][y-1] += z//2
+    # 봄 여름
+    for i in range(N):
+        for j in range(N):
+            if ground[i][j]:
+                tree = {}
+                dead_tree = 0
+                for now_age in sorted(ground[i][j].keys()):
+                    if now_age*ground[i][j][now_age] <= nutriton[i][j]:
+                        nutriton[i][j] -= now_age*ground[i][j][now_age]
+                        tree[now_age+1] = ground[i][j][now_age]
+                    else:
+                        safe = nutriton[i][j]//now_age
+                        if safe == 0:
+                            dead_tree += (now_age//2)*ground[i][j][now_age]
+                        else:
+                            nutriton[i][j] -= now_age*safe
+                            tree[now_age+1] = safe
+                            dead_tree += (now_age//2)*(ground[i][j][now_age]-safe)
+                nutriton[i][j] += dead_tree
+                ground[i][j] = tree
     # 가을
-    for i in range(len(tree)):
-        if live_tree[i]==0:
-            r=i
-            break
-    else:
-        r=len(tree)
-    new_tree = [0]*len(live_tree)*8
-    l = 0
-    for i in range(r):
-        x,y,z = live_tree[i]
-        if z%5==0:
-            for m in range(8):
-                ni = x+di[m]
-                nj = y+dj[m]
-                if 0<ni<=N and 0<nj<=N:
-                    new_tree[l] = [ni,nj,1]
-                    l+=1
-    if 0 in live_tree:
-        live_tree = live_tree[:k]
-    if 0 in new_tree:
-        new_tree = new_tree[:l]
+    for i in range(N):
+        for j in range(N):
+            if ground[i][j]:
+                for age in ground[i][j].keys():
+                    if age%5==0:
+                        num = ground[i][j][age]
+                        for k in range(8):
+                            ni=i+di[k]
+                            nj=j+dj[k]
+                            if 0<=ni<N and 0<=nj<N:
+                                if 1 not in ground[ni][nj].keys():
+                                    ground[ni][nj][1] = num
+                                else:
+                                    ground[ni][nj][1] += num
     # 겨울
     for i in range(N):
         for j in range(N):
-            c_food[i][j] += food[i][j]
-    tree = live_tree+new_tree
-print(len(tree))
+            nutriton[i][j] += S2D2[i][j]
+
+answer = 0
+for i in range(N):
+    for j in range(N):
+        answer += sum(ground[i][j].values())
+print(answer)
