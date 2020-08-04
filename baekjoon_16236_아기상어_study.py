@@ -2,6 +2,7 @@ N=int(input())
 d = N**2
 direction = [[-1,0],[0,-1],[0,1],[1,0]]
 trigger = False
+# 문제 개같이 쓰지 말아라
 def distance(si,sj,fi,fj,size,dis=0):
     global d, trigger
     if dis>=d:
@@ -32,7 +33,6 @@ for i in range(N):
         if horizon[j]==9:
             shark = [i,j,2]
             horizon[j]=0
-            break
         elif horizon[j] in fishes:
             if horizon[j] not in fish.keys():
                 fish[horizon[j]] = [[i,j]]
@@ -46,13 +46,15 @@ while True:
     if shark[2]<=7:
         for i in range(1,shark[2]):
             if i in fish.keys():
-                break
+                if fish[i] != []:
+                    break
         else:
             break
     else:
         for i in range(1,7):
             if i in fish.keys():
-                break
+                if fish[i] != []:
+                    break
         else:
             break
     d = N**2
@@ -77,6 +79,7 @@ while True:
                     if fj>fish[i][j][1]:
                         fi,fj = fish[i][j][0],fish[i][j][1]
                         what_f,whe_f=i,j
+    print('----------')
     d = N**2
     distance(shark[0],shark[1],fi,fj,shark[2])
     if trigger:
@@ -90,8 +93,7 @@ while True:
         fish[what_f].pop(whe_f)
     else:
         break
-    print('----------')
     for k in aqua:
         print(k)
-    print(shark[2],length)
+    print(shark,fi,fj,length,fish)
 print(length)
