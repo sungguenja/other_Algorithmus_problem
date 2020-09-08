@@ -4,7 +4,7 @@ def after(X):
 N,M = map(int,input().split())
 room = [[0]*N for i in range(N)]
 switch = [list(map(after,(map(int,input().split())))) for i in range(M)]
-
+## 여길 어떻게 채우지
 cnt = 0
 for i in range(N):
     for j in range(N):
