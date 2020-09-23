@@ -17,5 +17,8 @@ def solution(i=0,j=0):
         nj = j + dj[k]
         if 0<=ni<N and 0<=nj<M and load[i][j]>load[ni][nj]:
             memoization[i][j] += solution(ni,nj)
+        print('--------')
+        for k in memoization:
+            print(k)
     return memoization[i][j]
 print(solution())
