@@ -15,8 +15,7 @@ def memoization(i=0,j=0):
         ni = i+board[i][j]*di[k]
         nj = j+board[i][j]*dj[k]
         if 0<=ni<N and 0<=nj<N:
-            if visit[ni][nj]==0:
-                memo[i][j] += memoization(ni,nj)
+            memo[i][j] += memoization(ni,nj)
 
     return memo[i][j]
 
