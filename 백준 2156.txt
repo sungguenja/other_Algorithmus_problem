@@ -1,0 +1,13 @@
+N = int(input())
+wine = [0]*(N+1)
+for i in range(N):
+    wine[i+1] = int(input())
+stock = [0]*(N+1)
+if N>=1:
+    stock[1] = wine[1]
+if N>=2:
+    stock[2] = wine[1] + wine[2]
+if N>=3:
+    for i in range(3,N+1):
+        stock[i] = max(stock[i-3]+wine[i-1]+wine[i],stock[i-2]+wine[i],stock[i-1])
+print(stock[-1])
