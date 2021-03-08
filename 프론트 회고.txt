@@ -1,0 +1,5 @@
+뭐 크게 어려움은 없었던듯?
+https://medium.com/@armando_amador/how-to-make-http-requests-using-fetch-api-and-promises-b0ca7370a444
+https://webisfree.com/2019-01-30/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%9E%90%EC%8B%9D-%EC%9A%94%EC%86%8C%EC%9D%98-%EA%B0%9C%EC%88%98-%EA%B5%AC%ED%95%98%EA%B8%B0-childelementcount
+https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key
+https://velog.io/@minong/Javascript-%EA%B0%9D%EC%B2%B4%EC%97%90-%ED%95%B4%EB%8B%B9-key%EA%B0%92%EC%9D%B4-%EC%A1%B4%EC%9E%AC%ED%95%98%EB%8A%94%EC%A7%80-%ED%99%95%EC%9D%B8%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95
