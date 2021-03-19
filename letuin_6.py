@@ -33,7 +33,7 @@ for i in range(M):
 nnn = 0
 chosen_list = [[] for i in range(N)]
 before_list = []
-while before_list != chosen_list:
+while not isSame(chosen_list,before_list):
     nnn += 1
     before_list = deepcopy(chosen_list)
     for people in people_list:
@@ -71,10 +71,16 @@ while before_list != chosen_list:
                     chosen_list[target][change_target] = (people,buyer_rank)
                 else:
                     people.cnt += 1
-    if nnn<10:
-        print(chosen_list)
-        
-        for i in chosen_list:
-            for j in i:
-                print(j[0])
-            print("=========")
+    
+def isSame(chosen_list,before_list):
+    if len(chosen_list) != len(before_list):
+        return False
+    
+    for i in range(len(chosen_list)):
+        if len(chosen_list[i]) != len(before_list[i]):
+            return False
+        for j in range(len(chosen_list[i])):
+            if type(chosen_list[i][j]) != type(before_list[i][j]):
+                return False
+            else:
+                if type(chosen_list[i][j][0]) == People:
