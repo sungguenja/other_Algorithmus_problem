@@ -1,4 +1,5 @@
 import sys
+input = sys.stdin.readline
 N = int(input())
 for t in range(N):
     K = int(input())
