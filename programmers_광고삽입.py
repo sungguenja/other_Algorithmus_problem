@@ -29,9 +29,9 @@ def solution(play_time, adv_time, logs):
             time_list[i] += time_list[i-1]
     
     answer = 0
-    answer_cnt = 0
+    answer_cnt = time_list[adv_time - 1] - time_list[0]
     i = 0
-    while i + adv_time < play_time:
+    while i + adv_time <= play_time:
         tmp = time_list[i + adv_time] - time_list[i]
         if tmp > answer_cnt:
             answer_cnt = tmp
