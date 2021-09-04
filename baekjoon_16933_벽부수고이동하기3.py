@@ -3,7 +3,7 @@ from collections import deque
 input = stdin.readline
 
 N,M,K = map(int,input().split())
-maze = [list(input()) for i in range(N)]
+maze = [list(input().strip()) for i in range(N)]
 
 def bfs(N,M,K):
     answer = N*M*K*4
@@ -12,37 +12,33 @@ def bfs(N,M,K):
 
     Que = deque()
     Que.append((0,0,1,0,0))
-    visit = [[[[-1]*M for i in range(N)] for j in range(K+1)] for _ in range(2)]
+    visit = [[[False]*M for _ in range(N)] for i in range(K+1)]
+    for k in range(K+1):
+        visit[k][0][0] = True
 
     while Que:
-        i,j,cnt,block,day = Que.popleft()
+        i,j,cnt,wall,day = Que.popleft()
         
-        if cnt >= answer:
-            continue
-
         if i == N-1 and j == M-1:
             if cnt < answer:
                 answer = cnt
-            continue
+            return answer
 
         for d in range(4):
             ni = i + di[d]
             nj = j + dj[d]
             if 0<=ni<N and 0<=nj<M:
                 if maze[ni][nj] == '0':
-                    if visit[(day+1)%2][block][ni][nj] == -1 or visit[(day+1)%2][block][ni][nj] > cnt + 1:
-                        visit[(day+1)%2][block][ni][nj] = cnt + 1
-                        Que.append((ni,nj,cnt+1,block,(day+1)%2))
+                    if not visit[wall][ni][nj]:
+                        visit[wall][ni][nj] = True
+                        Que.append((ni,nj,cnt+1,wall,(day+1)%2))
                 else:
-                    if block < K:
+                    if wall < K and not visit[wall+1][ni][nj]:
                         if day == 0:
-                            if visit[(day+1)%2][block+1][ni][nj] == -1 or visit[(day+1)%2][block+1][ni][nj] > cnt + 1:
-                                visit[(day+1)%2][block+1][ni][nj] = cnt + 1
-                                Que.append((ni,nj,cnt+1,block+1,(day+1)%2))
+                            visit[wall+1][ni][nj] = True
+                            Que.append((ni,nj,cnt+1,wall+1,(day+1)%2))
                         else:
-                            if visit[(day+2)%2][block+1][ni][nj] == -1 or visit[(day+2)%2][block+1][ni][nj] > cnt + 2:
-                                visit[(day+2)%2][block+1][ni][nj] = cnt + 2
-                                Que.append((ni,nj,cnt+2,block+1,(day+2)%2))
+                            Que.append((i,j,cnt+1,wall,(day+1)%2))
     return answer
 
 answer = bfs(N,M,K)
