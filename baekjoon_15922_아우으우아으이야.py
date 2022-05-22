@@ -1,6 +1,3 @@
-from unittest import result
-
-
 N = int(input())
 x,y = map(int,input().split())
 answer = 0
