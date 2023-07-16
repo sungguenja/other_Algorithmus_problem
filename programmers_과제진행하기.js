@@ -24,17 +24,13 @@ function solution(plans) {
   const plansCnt = plans.length;
   plansWithTime.forEach((nowWork, index) => {
     if (index === plansCnt - 1) {
-      console.log(notYet, "before reverse for");
       answer.push(nowWork[0]);
       for (var i = notYet.length - 1; i >= 0; i--) {
-        console.log(notYet[i], i, "in reverse");
-        // answer.push(notYet[i][0]);
+        answer.push(notYet[i][0]);
       }
-      console.log(notYet, answer, "before lengthIndex");
       return;
     }
     const futureWork = plansWithTime[index + 1];
-    // console.log(futureWork);
     var leftTime = futureWork[1] - nowWork[1];
     if (leftTime >= nowWork[2]) {
       answer.push(nowWork[0]);
@@ -54,11 +50,9 @@ function solution(plans) {
         ]);
         leftTime -= notYetLastWork[2];
       }
-      console.log(notYet, answer, "leftTime >= nowWork[2]");
       return;
     }
     notYet.push([nowWork[0], nowWork[1], nowWork[2] - leftTime]);
-    console.log(notYet, answer, "leftTime >= nowWork[1]");
     return;
   });
   return answer;
